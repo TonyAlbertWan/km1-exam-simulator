@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Add autonomous agent operating model in `AGENTS.md`
+- Add Node-based engine unit tests and `npm test`
+- Add CI workflow for syntax checks and unit tests
+
 ## v1.1.0 - Star-ready rehearsal
 
 - 将产品定位升级为“科目一机考彩排器”

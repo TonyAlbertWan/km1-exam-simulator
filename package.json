@@ -1,0 +1,11 @@
+{
+  "name": "km1-exam-simulator",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Offline-friendly Subject One exam rehearsal simulator.",
+  "scripts": {
+    "check": "node --check app.js && node --check data/config.js && node --check data/questions.sample.js && node --check data/media.js && node --check src/engine.js && node --check src/ui.js && node --check tests/engine.test.js",
+    "test": "npm run check && node tests/engine.test.js"
+  },
+  "license": "MIT"
+}

@@ -21,6 +21,7 @@
 - `界面导览`：5步高亮说明考生信息、倒计时、题目区、答题卡和交卷
 - 彩排报告：成绩、合格状态、用时、正确/错误/未答、薄弱分类、错题回看
 - 无构建、无后端、无登录，下载后双击 `index.html` 即可使用
+- 自带基础 UT 和 CI，便于持续小步迭代
 
 ## 使用方法
 
@@ -34,6 +35,12 @@ python -m http.server 8000
 
 ```text
 http://localhost:8000/
+```
+
+开发检查：
+
+```bash
+npm test
 ```
 
 ## 项目边界
@@ -85,10 +92,17 @@ http://localhost:8000/
 ├── src/
 │   ├── engine.js
 │   └── ui.js
+├── tests/
+│   └── engine.test.js
+├── AGENTS.md
 ├── CONTRIBUTING.md
 ├── CHANGELOG.md
 └── .github/
 ```
+
+## Agent 协作
+
+项目采用轻量 Agent 协作模型，详见 `AGENTS.md`。日常迭代按 PM Owner、Product Designer、Developer、QA/Growth 四个职责运行，目标是每天产出可验证的小改进、测试结果、提交哈希和下一步建议。
 
 ## Roadmap
 
