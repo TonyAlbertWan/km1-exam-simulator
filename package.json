@@ -4,8 +4,8 @@
   "private": true,
   "description": "Offline-friendly Subject One exam rehearsal simulator.",
   "scripts": {
-    "check": "node --check app.js && node --check data/config.js && node --check data/questions.sample.js && node --check data/media.js && node --check src/engine.js && node --check src/ui.js && node --check tests/engine.test.js",
-    "test": "npm run check && node tests/engine.test.js"
+    "check": "node --check app.js && node --check data/config.js && node --check data/questions.sample.js && node --check data/media.js && node --check src/engine.js && node --check src/ui.js && node --check tests/engine.test.js && node --check tests/static.test.js",
+    "test": "npm run check && node tests/engine.test.js && node tests/static.test.js"
   },
   "license": "MIT"
 }

@@ -22,6 +22,7 @@
 - 彩排报告：成绩、合格状态、用时、正确/错误/未答、薄弱分类、错题回看
 - 无构建、无后端、无登录，下载后双击 `index.html` 即可使用
 - 自带基础 UT 和 CI，便于持续小步迭代
+- 自带静态健康检查，保护 README、截图、脚本加载顺序和 GitHub Pages 配置
 
 ## 使用方法
 
@@ -94,6 +95,7 @@ npm test
 │   └── ui.js
 ├── tests/
 │   └── engine.test.js
+│   └── static.test.js
 ├── AGENTS.md
 ├── CONTRIBUTING.md
 ├── CHANGELOG.md

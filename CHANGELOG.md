@@ -7,6 +7,7 @@
 - Add CI workflow for syntax checks and unit tests
 - Replace the README placeholder with a real homepage screenshot
 - Add schema contract tests for sample questions and mode configuration
+- Add static repository health tests for README assets, script order, and GitHub community files
 
 ## v1.1.0 - Star-ready rehearsal
 
