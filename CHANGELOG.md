@@ -5,6 +5,8 @@
 - Add autonomous agent operating model in `AGENTS.md`
 - Add Node-based engine unit tests and `npm test`
 - Add CI workflow for syntax checks and unit tests
+- Replace the README placeholder with a real homepage screenshot
+- Add schema contract tests for sample questions and mode configuration
 
 ## v1.1.0 - Star-ready rehearsal
 

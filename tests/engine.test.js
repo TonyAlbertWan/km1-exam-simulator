@@ -3,6 +3,8 @@ const assert = require("node:assert/strict");
 global.window = { KM1: {} };
 
 require("../src/engine.js");
+require("../data/questions.sample.js");
+require("../data/config.js");
 
 const engine = global.window.KM1.engine;
 
@@ -131,4 +133,43 @@ test("tick changes scored sessions but not tour sessions", () => {
 test("formats time safely", () => {
   assert.equal(engine.formatTime(65), "01:05");
   assert.equal(engine.formatTime(-3), "00:00");
+});
+
+test("sample questions keep the public contribution schema stable", () => {
+  const validTypes = new Set(["single", "judge"]);
+  const validDifficulty = new Set(["easy", "medium", "hard"]);
+  const ids = new Set();
+
+  assert.ok(global.window.KM1.questions.length >= 20);
+
+  for (const question of global.window.KM1.questions) {
+    assert.equal(typeof question.id, "string");
+    assert.ok(question.id.length > 0);
+    assert.equal(ids.has(question.id), false, `duplicate id: ${question.id}`);
+    ids.add(question.id);
+
+    assert.equal(validTypes.has(question.type), true, `invalid type: ${question.id}`);
+    assert.equal(typeof question.category, "string");
+    assert.equal(validDifficulty.has(question.difficulty), true, `invalid difficulty: ${question.id}`);
+    assert.equal(typeof question.text, "string");
+    assert.ok(question.text.length >= 6);
+    assert.ok(Array.isArray(question.options));
+    assert.ok(question.options.length >= 2);
+    assert.ok(Number.isInteger(question.answer));
+    assert.ok(question.answer >= 0 && question.answer < question.options.length);
+    assert.equal(typeof question.explanation, "string");
+    assert.ok(question.explanation.length >= 6);
+  }
+});
+
+test("configured modes keep the public mode contract stable", () => {
+  const modes = global.window.KM1.config.modes;
+  assert.deepEqual(Object.keys(modes).sort(), ["exam", "quick", "tour"]);
+  assert.equal(modes.exam.totalQuestions, 100);
+  assert.equal(modes.exam.durationSeconds, 45 * 60);
+  assert.equal(modes.exam.immediateFeedback, false);
+  assert.equal(modes.quick.totalQuestions, 20);
+  assert.equal(modes.quick.immediateFeedback, true);
+  assert.equal(modes.tour.scored, false);
+  assert.equal(modes.tour.tour, true);
 });
