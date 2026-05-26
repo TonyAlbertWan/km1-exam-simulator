@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>科目一理论考试模拟系统</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="exam-shell" aria-label="科目一理论考试模拟系统">
+    <header class="system-title">
+      <div>
+        <strong>机动车驾驶人理论考试系统</strong>
+        <span>第01考台</span>
+      </div>
+      <div class="header-meta">
+        <span>考试科目：科目一</span>
+        <span>车型：C1/C2</span>
+      </div>
+    </header>
+
+    <section id="startScreen" class="start-screen">
+      <div class="start-panel">
+        <div class="candidate-card">
+          <div class="portrait" aria-label="考生照片占位">
+            <span>证件照</span>
+          </div>
+          <dl>
+            <div><dt>姓名</dt><dd>模拟考生</dd></div>
+            <div><dt>证件号</dt><dd>**************1234</dd></div>
+            <div><dt>准驾车型</dt><dd>C1 / C2</dd></div>
+            <div><dt>考试场次</dt><dd>上午第一场</dd></div>
+          </dl>
+        </div>
+        <div class="notice-panel">
+          <h1>科目一考试模拟</h1>
+          <ol>
+            <li>正式考试通常为 100 题，45 分钟，90 分合格。</li>
+            <li>本页面只放少量示例题，重点模拟考场电脑的操作节奏。</li>
+            <li>选择答案后可以修改，点击“确认本题”后进入下一题。</li>
+            <li>交卷前会出现确认窗口，时间到会自动交卷。</li>
+          </ol>
+          <button id="startBtn" class="primary-btn">开始考试</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="examScreen" class="exam-screen hidden">
+      <aside class="left-panel">
+        <div class="section-caption">考生信息</div>
+        <div class="photo-box"><span>现场照片</span></div>
+        <dl class="info-list">
+          <div><dt>姓名：</dt><dd>模拟考生</dd></div>
+          <div><dt>考号：</dt><dd>KM1-0001</dd></div>
+          <div><dt>证件：</dt><dd>********1234</dd></div>
+          <div><dt>类型：</dt><dd>小型汽车</dd></div>
+          <div><dt>科目：</dt><dd>科目一</dd></div>
+        </dl>
+        <div class="timer-block">
+          <span>剩余时间</span>
+          <strong id="timeLeft">45:00</strong>
+        </div>
+      </aside>
+
+      <section class="question-panel">
+        <div class="question-toolbar">
+          <span id="questionIndex">第 001 / 100 题</span>
+          <span id="questionType">单项选择题</span>
+        </div>
+        <div class="question-content">
+          <div id="questionMedia" class="question-media hidden"></div>
+          <h2 id="questionText"></h2>
+          <div id="options" class="options" role="radiogroup" aria-label="答案选项"></div>
+        </div>
+        <div id="questionHint" class="question-hint">请选择答案。</div>
+      </section>
+
+      <aside class="right-panel">
+        <div class="section-caption">答题信息</div>
+        <div class="score-grid">
+          <div><span>已答</span><strong id="answeredCount">0</strong></div>
+          <div><span>未答</span><strong id="unansweredCount">100</strong></div>
+          <div><span>错误</span><strong id="wrongCount">0</strong></div>
+          <div><span>得分</span><strong id="scoreCount">0</strong></div>
+        </div>
+        <div class="section-caption">题号导航</div>
+        <div id="answerSheet" class="answer-sheet" aria-label="题号导航"></div>
+        <div class="legend">
+          <span><i class="state-dot unanswered"></i>未答</span>
+          <span><i class="state-dot answered"></i>已答</span>
+          <span><i class="state-dot current"></i>当前</span>
+          <span><i class="state-dot wrong"></i>错误</span>
+        </div>
+      </aside>
+
+      <nav class="bottom-bar" aria-label="考试操作">
+        <button id="prevBtn">上一题</button>
+        <button id="confirmBtn" class="primary-btn">确认本题</button>
+        <button id="nextBtn">下一题</button>
+        <button id="submitBtn" class="danger-btn">交卷</button>
+      </nav>
+    </section>
+
+    <section id="resultScreen" class="result-screen hidden">
+      <div class="result-card">
+        <h1>考试结束</h1>
+        <div id="resultScore" class="final-score">0 分</div>
+        <div id="resultStatus" class="result-status">未合格</div>
+        <dl class="result-grid">
+          <div><dt>正确</dt><dd id="resultCorrect">0</dd></div>
+          <div><dt>错误</dt><dd id="resultWrong">0</dd></div>
+          <div><dt>未答</dt><dd id="resultUnanswered">0</dd></div>
+          <div><dt>用时</dt><dd id="resultTime">00:00</dd></div>
+        </dl>
+        <div class="result-actions">
+          <button id="reviewBtn">查看答题情况</button>
+          <button id="restartBtn" class="primary-btn">重新模拟</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <h2 id="modalTitle">确认交卷</h2>
+      <p id="modalMessage">确认交卷后将结束考试。</p>
+      <div class="modal-actions">
+        <button id="cancelSubmitBtn">继续答题</button>
+        <button id="confirmSubmitBtn" class="danger-btn">现在交卷</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
