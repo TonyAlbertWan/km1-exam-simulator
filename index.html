@@ -3,24 +3,48 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>科目一理论考试模拟系统</title>
+  <meta name="description" content="开源、免登录、可离线使用的科目一机考彩排器，帮助考生提前熟悉考场电脑界面。">
+  <title>科目一机考彩排器</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="exam-shell" aria-label="科目一理论考试模拟系统">
+  <main class="exam-shell" aria-label="科目一机考彩排器">
     <header class="system-title">
       <div>
-        <strong>机动车驾驶人理论考试系统</strong>
-        <span>第01考台</span>
+        <strong>科目一机考彩排器</strong>
+        <span>考前10分钟，提前熟悉科目一机考界面</span>
       </div>
       <div class="header-meta">
-        <span>考试科目：科目一</span>
-        <span>车型：C1/C2</span>
+        <a href="https://github.com/TonyAlbertWan/km1-exam-simulator" target="_blank" rel="noreferrer">GitHub</a>
+        <span>开源 / 免登录 / 可离线</span>
       </div>
     </header>
 
-    <section id="startScreen" class="start-screen">
-      <div class="start-panel">
+    <section id="modeScreen" class="mode-screen">
+      <div class="hero-band">
+        <div>
+          <p class="kicker">Subject One Exam Rehearsal</p>
+          <h1>像坐到考场电脑前一样，先彩排一遍。</h1>
+          <p>本项目不替代刷题工具，也不提供官方题库；它专注模拟科目一机考流程、按钮、倒计时、答题卡和交卷确认。</p>
+        </div>
+        <div class="hero-note">
+          <strong>规则外壳</strong>
+          <span>100题 / 45分钟 / 90分合格</span>
+          <small>默认 C1/C2 小型汽车</small>
+        </div>
+      </div>
+
+      <div id="modeCards" class="mode-cards" aria-label="选择彩排模式"></div>
+
+      <div class="trust-strip">
+        <span>参考公开考试规则与常见仿真页面</span>
+        <span>示例题均为原创演示，不搬运商业题库</span>
+        <span>欢迎反馈你的考场界面差异</span>
+      </div>
+    </section>
+
+    <section id="verifyScreen" class="verify-screen hidden">
+      <div class="verify-grid">
         <div class="candidate-card">
           <div class="portrait" aria-label="考生照片占位">
             <span>证件照</span>
@@ -33,14 +57,13 @@
           </dl>
         </div>
         <div class="notice-panel">
-          <h1>科目一考试模拟</h1>
-          <ol>
-            <li>正式考试通常为 100 题，45 分钟，90 分合格。</li>
-            <li>本页面只放少量示例题，重点模拟考场电脑的操作节奏。</li>
-            <li>选择答案后可以修改，点击“确认本题”后进入下一题。</li>
-            <li>交卷前会出现确认窗口，时间到会自动交卷。</li>
-          </ol>
-          <button id="startBtn" class="primary-btn">开始考试</button>
+          <p class="kicker">考前核验</p>
+          <h1 id="verifyTitle">全真彩排确认</h1>
+          <ol id="verifyRules"></ol>
+          <div class="verify-actions">
+            <button id="backToModesBtn">返回模式选择</button>
+            <button id="verifyStartBtn" class="primary-btn">我已阅读，开始考试</button>
+          </div>
         </div>
       </div>
     </section>
@@ -65,6 +88,7 @@
       <section class="question-panel">
         <div class="question-toolbar">
           <span id="questionIndex">第 001 / 100 题</span>
+          <span id="modeBadge" class="mode-badge">全真彩排</span>
           <span id="questionType">单项选择题</span>
         </div>
         <div class="question-content">
@@ -78,16 +102,17 @@
       <aside class="right-panel">
         <div class="section-caption">答题信息</div>
         <div class="score-grid">
-          <div><span>已答</span><strong id="answeredCount">0</strong></div>
+          <div><span>已确认</span><strong id="answeredCount">0</strong></div>
           <div><span>未答</span><strong id="unansweredCount">100</strong></div>
-          <div><span>错误</span><strong id="wrongCount">0</strong></div>
+          <div><span>错误</span><strong id="wrongCount">-</strong></div>
           <div><span>得分</span><strong id="scoreCount">0</strong></div>
         </div>
         <div class="section-caption">题号导航</div>
         <div id="answerSheet" class="answer-sheet" aria-label="题号导航"></div>
         <div class="legend">
           <span><i class="state-dot unanswered"></i>未答</span>
-          <span><i class="state-dot answered"></i>已答</span>
+          <span><i class="state-dot answered"></i>已选</span>
+          <span><i class="state-dot confirmed"></i>已确认</span>
           <span><i class="state-dot current"></i>当前</span>
           <span><i class="state-dot wrong"></i>错误</span>
         </div>
@@ -103,7 +128,8 @@
 
     <section id="resultScreen" class="result-screen hidden">
       <div class="result-card">
-        <h1>考试结束</h1>
+        <p class="kicker">彩排报告</p>
+        <h1>本次科目一机考彩排结束</h1>
         <div id="resultScore" class="final-score">0 分</div>
         <div id="resultStatus" class="result-status">未合格</div>
         <dl class="result-grid">
@@ -112,10 +138,17 @@
           <div><dt>未答</dt><dd id="resultUnanswered">0</dd></div>
           <div><dt>用时</dt><dd id="resultTime">00:00</dd></div>
         </dl>
-        <div class="result-actions">
-          <button id="reviewBtn">查看答题情况</button>
-          <button id="restartBtn" class="primary-btn">重新模拟</button>
+        <div class="weak-panel">
+          <strong>薄弱分类</strong>
+          <div id="weakList" class="weak-list"></div>
         </div>
+        <div class="result-actions">
+          <button id="reviewBtn">查看全部解析</button>
+          <button id="wrongReviewBtn">只看错题</button>
+          <button id="copyLinkBtn">复制项目链接</button>
+          <button id="restartBtn" class="primary-btn">重新彩排</button>
+        </div>
+        <div id="reviewList" class="review-list" aria-label="答题回看"></div>
       </div>
     </section>
   </main>
@@ -123,7 +156,7 @@
   <div id="modalBackdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
       <h2 id="modalTitle">确认交卷</h2>
-      <p id="modalMessage">确认交卷后将结束考试。</p>
+      <p id="modalMessage">确认交卷后将结束本次彩排。</p>
       <div class="modal-actions">
         <button id="cancelSubmitBtn">继续答题</button>
         <button id="confirmSubmitBtn" class="danger-btn">现在交卷</button>
@@ -131,6 +164,24 @@
     </div>
   </div>
 
+  <div id="tourOverlay" class="tour-overlay hidden" aria-live="polite">
+    <div class="tour-card">
+      <span id="tourStepText">1 / 5</span>
+      <h2 id="tourTitle">考生信息区</h2>
+      <p id="tourBody">正式考试前先核对个人信息。</p>
+      <div class="tour-actions">
+        <button id="tourPrevBtn">上一步</button>
+        <button id="tourNextBtn" class="primary-btn">下一步</button>
+        <button id="tourEndBtn">结束导览</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="data/config.js"></script>
+  <script src="data/questions.sample.js"></script>
+  <script src="data/media.js"></script>
+  <script src="src/engine.js"></script>
+  <script src="src/ui.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

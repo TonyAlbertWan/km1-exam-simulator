@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-label="科目一机考彩排器截图占位">
+  <rect width="1200" height="680" fill="#c9d5e2"/>
+  <rect x="70" y="50" width="1060" height="580" fill="#f4f7fb" stroke="#4d6f94"/>
+  <rect x="70" y="50" width="1060" height="58" fill="#0a3f83"/>
+  <text x="92" y="88" fill="#fff" font-family="Microsoft YaHei, Arial" font-size="28" font-weight="700">科目一机考彩排器</text>
+  <rect x="100" y="145" width="240" height="430" fill="#eef4fa" stroke="#8fa6bd"/>
+  <rect x="370" y="145" width="480" height="430" fill="#fff" stroke="#8fa6bd"/>
+  <rect x="880" y="145" width="220" height="430" fill="#eef4fa" stroke="#8fa6bd"/>
+  <text x="390" y="205" fill="#123d68" font-family="Microsoft YaHei, Arial" font-size="28" font-weight="700">第 001 / 100 题</text>
+  <text x="390" y="270" fill="#17212b" font-family="Microsoft YaHei, Arial" font-size="24">这里展示题干、选项和考场操作提示。</text>
+  <rect x="390" y="320" width="410" height="46" fill="#fbfdff" stroke="#a9b7c7"/>
+  <rect x="390" y="382" width="410" height="46" fill="#fbfdff" stroke="#a9b7c7"/>
+  <rect x="390" y="444" width="410" height="46" fill="#fbfdff" stroke="#a9b7c7"/>
+  <text x="900" y="205" fill="#123d68" font-family="Microsoft YaHei, Arial" font-size="22" font-weight="700">答题卡</text>
+  <text x="100" y="615" fill="#405060" font-family="Microsoft YaHei, Arial" font-size="22">真实项目截图可在发布 v1.1 后替换此占位图</text>
+</svg>
