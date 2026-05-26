@@ -55,6 +55,7 @@ test("GitHub community and deployment files exist", () => {
     "AGENTS.md",
     "CONTRIBUTING.md",
     "CHANGELOG.md",
+    "docs/daily-brief-template.md",
     ".github/workflows/ci.yml",
     ".github/workflows/pages.yml",
     ".github/ISSUE_TEMPLATE/bug_report.md",
@@ -71,6 +72,7 @@ test("contribution docs preserve privacy and copyright guardrails", () => {
   const contributing = read("CONTRIBUTING.md");
   assert.match(agents, /Road Test Lab <36988005\+TonyAlbertWan@users\.noreply\.github\.com>/);
   assert.match(agents, /Do not fake contributors/);
+  assert.match(agents, /docs\/daily-brief-template\.md/);
   assert.match(contributing, /不接受什么/);
   assert.match(contributing, /商业刷题 App/);
 });

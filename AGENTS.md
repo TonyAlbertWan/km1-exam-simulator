@@ -56,6 +56,8 @@ The project should win attention through usefulness, trust, clarity, and steady 
    - Current risk
    - Recommended next step
 
+Use `docs/daily-brief-template.md` as the stable output shape so the user can scan every run in under one minute.
+
 ## Versioning Rules
 
 - Every code or documentation change must be committed.
