@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add source PPT notes and a Word conversion with slide images plus copyable text notes
 - Add autonomous agent operating model in `AGENTS.md`
 - Add Node-based engine unit tests and `npm test`
 - Add CI workflow for syntax checks and unit tests
